@@ -32,7 +32,11 @@ A Telegram bot that monitors UniMAP's e-learning portal for updates and sends no
 ## 📩 Sample Output
 
 ![image](https://github.com/user-attachments/assets/6a3c58ee-f07f-4556-bc55-bc99274618b5)
+
 ![image](https://github.com/user-attachments/assets/e23207dc-f786-41e3-9d8d-9de7e62896cb)
+
+![image](https://github.com/user-attachments/assets/4ba55b6b-2e51-4c2c-b3d4-a539f9f6be39)
+
 
 ## 🏗️ Architecture
 
