@@ -127,6 +127,168 @@ This will help you find the chat IDs for your Telegram groups.
 python bot.py
 ```
 
+## 💻 Running Locally (For Beginners)
+
+This section provides detailed step-by-step instructions for complete beginners who want to run the bot on their local machine.
+
+### Prerequisites Setup
+
+#### 1. Install Python
+- **Windows**: Download Python from [python.org](https://www.python.org/downloads/) (3.7 or higher)
+  - ✅ Make sure to check "Add Python to PATH" during installation
+- **macOS**: Install using Homebrew: `brew install python3` or download from [python.org](https://www.python.org/downloads/)
+- **Linux**: Usually pre-installed, or use: `sudo apt install python3 python3-pip`
+
+#### 2. Install Git
+- **Windows**: Download from [git-scm.com](https://git-scm.com/download/win)
+- **macOS**: Install using Homebrew: `brew install git` or download from [git-scm.com](https://git-scm.com/download/mac)
+- **Linux**: `sudo apt install git`
+
+#### 3. Create a Telegram Bot
+1. Open Telegram and search for `@BotFather`
+2. Start a chat and send `/newbot`
+3. Follow the instructions to create your bot
+4. Save the **Bot Token** (you'll need this later)
+5. Add your bot to the group/chat where you want notifications
+
+### Step-by-Step Local Setup
+
+#### Step 1: Download the Code
+```bash
+# Open Terminal/Command Prompt and run:
+git clone https://github.com/yourusername/unimap-student-bot.git
+cd unimap-student-bot
+```
+
+#### Step 2: Create Virtual Environment
+```bash
+# Windows (Command Prompt)
+python -m venv venv
+venv\Scripts\activate
+
+# Windows (PowerShell)
+python -m venv venv
+venv\Scripts\Activate.ps1
+
+# macOS/Linux
+python3 -m venv venv
+source venv/bin/activate
+```
+
+**Note**: Your terminal should show `(venv)` at the beginning when the virtual environment is active.
+
+#### Step 3: Install Required Packages
+```bash
+pip install -r requirements.txt
+```
+
+#### Step 4: Set Up Configuration Files
+
+**Create Environment File:**
+```bash
+# Windows
+copy .env.example .env
+
+# macOS/Linux
+cp .env.example .env
+```
+
+**Edit the `.env` file** (use any text editor like Notepad, VS Code, or nano):
+```env
+# Replace with your actual bot token from BotFather
+TELEGRAM_BOT_TOKEN=1234567890:ABCdefGHIjklMNOpqrsTUVwxyz
+
+# Replace with your actual chat IDs (find using get_chat_id.py)
+TELEGRAM_CHAT_IDS=-1001234567890
+
+# Replace with your UniMAP portal credentials
+PORTAL_USERNAME=your_student_id
+PORTAL_PASSWORD=your_portal_password
+```
+
+#### Step 5: Find Your Telegram Chat ID
+```bash
+python get_chat_id.py
+```
+Follow the instructions to find your chat ID and update the `.env` file.
+
+#### Step 6: Configure Your Courses
+Edit `config.py` file with your actual courses:
+
+```python
+COURSES = {
+    "SMP25503": {
+        "name": "Advanced Mathematics (Sem 2-2024/2025)",
+        "url": "https://elearning.unimap.edu.my/course/view.php?id=7360"
+    },
+    # Add more courses following the same pattern
+}
+```
+
+**To find course URLs:**
+1. Login to your UniMAP e-learning portal
+2. Click on a course
+3. Copy the URL from browser address bar
+4. Use this URL in the configuration
+
+#### Step 7: Test Run the Bot
+```bash
+python bot.py
+```
+
+If everything is set up correctly, you should see:
+```
+Bot started successfully!
+Scheduled checks at 07:00 and 19:00 (GMT+8)
+```
+
+### Local Development Tips
+
+#### Keep the Bot Running
+- **For testing**: Just run `python bot.py` in your terminal
+- **For long-term use**: Use task schedulers or keep terminal open
+
+#### Stopping the Bot
+- Press `Ctrl+C` in the terminal where the bot is running
+
+#### Checking Logs
+- Bot logs are saved in `bot.log` and `assignment_tracker.log`
+- Use any text editor to view these files for debugging
+
+#### Making Changes
+1. Stop the bot (`Ctrl+C`)
+2. Make your changes to the code
+3. Save the files
+4. Restart the bot (`python bot.py`)
+
+### Common Beginner Issues
+
+| Problem | Solution |
+|---------|----------|
+| `python: command not found` | Install Python and add to PATH |
+| `Permission denied` | Run terminal as administrator (Windows) or use `sudo` (Linux/Mac) |
+| `Module not found` | Make sure virtual environment is activated and dependencies installed |
+| `Bot token invalid` | Double-check token from BotFather, no extra spaces |
+| `No chat ID found` | Make sure bot is added to your group and you've messaged it |
+
+### Testing Your Setup
+
+1. **Test bot token**: Run `python get_chat_id.py` - it should not give authentication errors
+2. **Test portal login**: Check logs for "Login successful" message
+3. **Test notifications**: Bot should send a startup message to your configured chat
+
+### Directory Structure After Setup
+```
+unimap-student-bot/
+├── venv/                 # Virtual environment (created)
+├── .env                 # Your configuration (created)
+├── bot.log             # Bot logs (created when running)
+├── assignment_tracker.log  # Assignment logs (created when running)
+├── bot.py              # Main bot file
+├── config.py           # Course configuration
+└── ... other files
+```
+
 ## 🔧 Configuration
 
 ### Course Configuration
