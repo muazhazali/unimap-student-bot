@@ -29,6 +29,11 @@ A Telegram bot that monitors UniMAP's e-learning portal for updates and sends no
   - Formatted messages with emojis for better readability
   - Different notification types for various updates
 
+## 📩 Sample Output
+
+![image](https://github.com/user-attachments/assets/6a3c58ee-f07f-4556-bc55-bc99274618b5)
+![image](https://github.com/user-attachments/assets/e23207dc-f786-41e3-9d8d-9de7e62896cb)
+
 ## 🏗️ Architecture
 
 The bot is built with a modular architecture:
