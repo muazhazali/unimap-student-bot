@@ -56,6 +56,17 @@ def parse_assignment_page(html: str, url: str, course_code: str) -> Assignment:
         logging.info(f"Parsing assignment page: {url}")
         soup = BeautifulSoup(html, 'html.parser')
         
+        # Import regex at the start
+        import re
+        
+        # Define date patterns that can be used throughout the function
+        date_patterns = [
+            r'Due (\d{1,2}/\d{1,2}/\d{2,4})',  # matches "Due 03/05/25"
+            r'due (\d{1,2}/\d{1,2}/\d{2,4})',  # matches "due 03/05/25"
+            r'Due (\d{1,2} [A-Za-z]+ \d{4})',  # matches "Due 14 May 2025"
+            r'due (\d{1,2} [A-Za-z]+ \d{4})'   # matches "due 14 May 2025"
+        ]
+        
         # Get assignment name and try to extract due date from title
         name = soup.find('h2').text.strip() if soup.find('h2') else ""
         
@@ -64,14 +75,6 @@ def parse_assignment_page(html: str, url: str, course_code: str) -> Assignment:
         if '#title=' in url:
             title = url.split('#title=')[-1]
             # Try to extract date from title
-            import re
-            date_patterns = [
-                r'Due (\d{1,2}/\d{1,2}/\d{2,4})',  # matches "Due 03/05/25"
-                r'due (\d{1,2}/\d{1,2}/\d{2,4})',  # matches "due 03/05/25"
-                r'Due (\d{1,2} [A-Za-z]+ \d{4})',  # matches "Due 14 May 2025"
-                r'due (\d{1,2} [A-Za-z]+ \d{4})'   # matches "due 14 May 2025"
-            ]
-            
             for pattern in date_patterns:
                 match = re.search(pattern, title)
                 if match:
